@@ -1,7 +1,5 @@
 package io.github.miniplaceholders.sponge;
 
-import cloud.commandframework.execution.CommandExecutionCoordinator;
-import cloud.commandframework.sponge.SpongeCommandManager;
 import com.google.inject.Inject;
 import io.github.miniplaceholders.api.Expansion;
 import io.github.miniplaceholders.api.utils.TagsUtils;
@@ -12,6 +10,7 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.text.Component;
 import org.apache.logging.log4j.Logger;
+import org.incendo.cloud.sponge7.SpongeCommandManager;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.api.Server;
 import org.spongepowered.api.command.Command;
@@ -86,12 +85,8 @@ public class SpongePlugin implements PlaceholdersPlugin {
 
     @Override
     public void registerPlatformCommand() {
-        final SpongeCommandManager<AudienceHolder> commandManager = new SpongeCommandManager<>(
-                pluginContainer,
-                CommandExecutionCoordinator.simpleCoordinator(),
-                AudienceHolder::cause,
-                AudienceHolder::new
-        );
+        // Cloud 2 doesn't support Sponge 8 yet?
+        final SpongeCommandManager<AudienceHolder> commandManager = null;
 
         PlaceholdersCommand.<AudienceHolder>builder()
                 .manager(commandManager)

@@ -1,7 +1,5 @@
 package io.github.miniplaceholders.paper;
 
-import cloud.commandframework.execution.AsynchronousCommandExecutionCoordinator;
-import cloud.commandframework.paper.PaperCommandManager;
 import io.github.miniplaceholders.api.Expansion;
 import io.github.miniplaceholders.api.utils.TagsUtils;
 import io.github.miniplaceholders.common.PlaceholdersCommand;
@@ -16,11 +14,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.incendo.cloud.SenderMapper;
+import org.incendo.cloud.execution.ExecutionCoordinator;
+import org.incendo.cloud.paper.PaperCommandManager;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
@@ -86,9 +86,8 @@ public final class PaperPlugin extends JavaPlugin implements PlaceholdersPlugin 
         try {
             PaperCommandManager<CommandSender> commandManager = new PaperCommandManager<>(
                     this,
-                    AsynchronousCommandExecutionCoordinator.simpleCoordinator(),
-                    Function.identity(),
-                    Function.identity()
+                    ExecutionCoordinator.simpleCoordinator(),
+                    SenderMapper.identity()
             );
             commandManager.registerBrigadier();
 
